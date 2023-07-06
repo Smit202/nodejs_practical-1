@@ -1,0 +1,109 @@
+
+<%- include('head.ejs') %>
+    <div class="container">
+        <h1 class="display-4 text-center mb-3">Timezone Time Converter</h1>
+        <form method="post" action="/">
+            <div class="col-md-12 converter">
+
+                <div class="col-md-6 form-group current">
+                    <h1 class="display-6 text-center mb-3">Current Time</h1><br><br>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="from" class="form-label">Current Timezone:</label>
+                            <select name="from" class="form-control form-control-lg">
+                                <% timezones.forEach(item => { 
+                                    if(item === result.inputTimezone) {
+                                %>
+                                    <option value="<%= item %>" selected><%= item %></option> 
+                                <% } else { %>
+                                    <option value="<%= item %>"><%= item %></option> <% } %>
+                                <% }); %>
+                            </select>
+                        </div>
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="hours" class="form-label">Hours:</label>
+                            <input name="hours" type="number" class="form-control form-control-lg" value="<%= result.inputHours %>" placeholder="Hours"
+                                min="1" max="12">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="minutes" class="form-label">Minutes:</label>
+                            <input name="minutes" type="number" class="form-control form-control-lg" value="<%= result.inputMinutes %>"
+                                placeholder="Minutes" min="0" max="59">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="meridiem" class="form-label">Meridiem:</label>
+                            <select name="meridiem" class="form-control form-control-lg">
+                                <% if(result.inputMeridiem === 'AM') { %>
+                                    <option selected>AM</option>
+                                    <option>PM</option>
+                                <% } else { %>
+                                    <option>AM</option>
+                                    <option selected>PM</option>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div><br>
+
+                </div>
+
+                <div class="col-md-6 form-group Converted">
+                    <h1 class="display-6 text-center mb-3">Converted Time</h1><br><br>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="to" class="form-label">Convert Timezone:</label>
+                            <select name="to" class="form-control form-control-lg">
+                                <% timezones.forEach(item => { 
+                                    if(item === result.resultTimezone) {
+                                %>
+                                    <option value="<%= item %>" selected><%= item %></option> 
+                                <% } else { %>
+                                    <option value="<%= item %>"><%= item %></option> <% } %>
+                                <% }); %>
+                            </select>
+                        </div>
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="resulthours" class="form-label">Hours:</label>
+                            <input name="resulthours" type="number" class="form-control form-control-lg" value="<%= result.resultHours %>" disabled>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="resultminutes" class="form-label">Minutes:</label>
+                            <input name="resultminutes" type="number" class="form-control form-control-lg" value="<%= result.resultMinutes %>" disabled>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="resultmeridiem" class="form-label">Meridiem:</label>
+                            <select name="resultmeridiem" class="form-control form-control-lg" disabled>
+                                <% if(result.resultMeridiem === 'AM') { %>
+                                    <option selected>AM</option>
+                                    <option>PM</option>
+                                <% } else { %>
+                                    <option>AM</option>
+                                    <option selected>PM</option>
+                                <% } %>
+                            </select>
+                            </select>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <div class="submit">
+                <button type="submit" class="btn btn-primary btn-lg">Convert</button>
+            </div>
+
+        </form>
+    </div>
+    <!-- partial -->
+</body>
+
+</html>
